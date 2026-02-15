@@ -126,7 +126,7 @@ const messageText = `
 حبيت نقلك بلي هذا
 أجمل عام وأجمل نهار
 لأنك دخلتي لحياتي
-ووليتي جزء منها اسف كان كشما غلط ولا في هذا عام☝🏻🙃🙃😗
+ووليتي جزء منها اسف كان كشما غلط ☝🏻🙃🙃🙃😗
 `;
 
 let i = 0;
@@ -158,28 +158,17 @@ function typeWriter(){
 function showFinal(){
   document.getElementById("content").remove();
 
-  /* إطار الصور + النص */
+  /* إطار الصورة + النص */
   const frame1 = document.createElement("div");
   frame1.className = "frame";
 
-  const images = [
-    "flower.jpg",
-    "flower1.jpg",
-    "flower2.jpg",
-    "flower3.jpg",
-    "flower4.jpg",
-    "flower5.jpg"
-  ];
-
-  images.forEach(src=>{
-    const img = document.createElement("img");
-    img.src = src;
-    frame1.appendChild(img);
-  });
+  const img = document.createElement("img");
+  img.src = "flower.jpg";
+  frame1.appendChild(img);
 
   const caption = document.createElement("div");
   caption.className = "caption";
-  caption.innerText = "رسمتها من البي لى جالك 😔☝🏻😂 لخرين اك تعرفيهم ☝🏻🙃🙃🙃";
+  caption.innerText = "رسمتها من البي على جالك ☝🏻😔😂";
   frame1.appendChild(caption);
 
   /* إطار العداد */
