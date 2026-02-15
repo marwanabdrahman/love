@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love 💙</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#1e90ff,#ffffff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial,sans-serif;
+  direction:rtl;
+  overflow:hidden;
+}
+
+/* الصندوق */
+.box{
+  background:rgba(255,255,255,0.25);
+  padding:24px;
+  border-radius:25px;
+  text-align:center;
+  backdrop-filter:blur(10px);
+  width:90%;
+  max-width:360px;
+  z-index:2;
+}
+
+h2{color:#0a3d62;font-size:20px}
+
+input,button{
+  width:100%;
+  padding:12px;
+  border-radius:20px;
+  border:none;
+  margin-top:12px;
+  font-size:15px;
+  text-align:center;
+}
+
+button{
+  background:#ffffff;
+  color:#0a3d62;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.message{
+  color:#0a3d62;
+  line-height:2;
+  white-space:pre-line;
+}
+
+/* الصورة */
+.final-image{
+  position:fixed;
+  top:36%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:190px;
+  max-width:75%;
+  z-index:3;
+}
+
+/* النص تحت الصورة */
+.caption{
+  position:fixed;
+  top:55%;
+  width:100%;
+  text-align:center;
+  color:#0a3d62;
+  font-size:15px;
+  z-index:3;
+}
+
+/* العداد */
+.counter{
+  position:fixed;
+  bottom:12%;
+  width:100%;
+  text-align:center;
+  color:#0a3d62;
+  font-size:15px;
+  z-index:3;
+}
+
+/* الورد */
+.flower{
+  position:fixed;
+  top:-40px;
+  font-size:22px;
+  animation:fall linear infinite;
+  z-index:1;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="login">
+  <h2>💙 أدخل كلمة السر 💙</h2>
+  <input id="password" placeholder="تاريخ ميلاد أفضل شخص فالدنيا ☝🏻🙃">
+  <button onclick="check()">دخول</button>
+</div>
+
+<script>
+const correctPassword = "08/17";
+const startDate = new Date("2025-02-28T00:00:00");
+
+const messageText = `
+روانتيييييي ☝🏻🙃🙃🙃🙃🙃
+كي تشوفي هذا رسالة تسما
+فات أشمل وأحلى عام في حياة مروان 💙
+إن شاء الله كل عام وحنا بخير 🫶🏻
+ديما سعيدين، ديما مع بعض،
+وما يكونش الأخير.
+نبقاو حتى نعقد ليث ☝🏻😔😂
+حبيت نقلك بلي هذا
+أجمل عام وأجمل نهار
+لأنك دخلتي لحياتي
+ووليتي جزء منها 🤍
+`;
+
+let i = 0;
+startFlowers();
+
+function check(){
+  if(password.value === correctPassword){
+    document.body.innerHTML = `
+      <div class="box" id="content">
+        <div class="message" id="typed"></div>
+        <button id="btn" style="display:none" onclick="showFinal()">👇 اضغط هنا</button>
+      </div>
+    `;
+    typeWriter();
+  }else{
+    alert("كلمة السر خاطئة 💔");
+  }
+}
+
+function typeWriter(){
+  if(i < messageText.length){
+    typed.innerHTML += messageText.charAt(i++);
+    setTimeout(typeWriter,80);
+  }else{
+    btn.style.display = "block";
+  }
+}
+
+function showFinal(){
+  document.getElementById("content").remove();
+
+  const img = document.createElement("img");
+  img.src = "flower.jpg";   // ← ضع صورتك JPG بنفس الاسم
+  img.className = "final-image";
+  document.body.appendChild(img);
+
+  const caption = document.createElement("div");
+  caption.className = "caption";
+  caption.innerText = "رسمتها من البي على جالك ☝🏻😔";
+  document.body.appendChild(caption);
+
+  const counter = document.createElement("div");
+  counter.className = "counter";
+  document.body.appendChild(counter);
+
+  setInterval(()=>{
+    const now = new Date();
+    let diff = Math.floor((now - startDate)/1000);
+    const d = Math.floor(diff/86400);
+    diff%=86400;
+    const h = Math.floor(diff/3600);
+    diff%=3600;
+    const m = Math.floor(diff/60);
+    const s = diff%60;
+
+    counter.innerHTML = `
+      أجمل أيامي بدأت منذ 🤍<br>
+      ${d} يوم • ${h} ساعة • ${m} دقيقة • ${s} ثانية
+    `;
+  },1000);
+}
+
+function startFlowers(){
+  const flowers = ["🌸","🌷","🌼","💐"];
+  setInterval(()=>{
+    const f=document.createElement("div");
+    f.className="flower";
+    f.innerText=flowers[Math.floor(Math.random()*flowers.length)];
+    f.style.left=Math.random()*100+"vw";
+    f.style.animationDuration=(3+Math.random()*4)+"s";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),8000);
+  },250);
+}
+</script>
+
+</body>
+  </html>
