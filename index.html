@@ -16,15 +16,15 @@ body{
   font-family:Arial,sans-serif;
   direction:rtl;
   overflow:hidden;
+  flex-direction:column;
 }
 
-/* الصندوق */
+/* صندوق الدخول */
 .box{
-  background:rgba(255,255,255,0.25);
+  background:rgba(255,255,255,0.35);
   padding:24px;
   border-radius:25px;
   text-align:center;
-  backdrop-filter:blur(10px);
   width:90%;
   max-width:360px;
   z-index:2;
@@ -55,40 +55,41 @@ button{
   white-space:pre-line;
 }
 
-/* الصورة */
-.final-image{
-  position:fixed;
-  top:36%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:190px;
-  max-width:75%;
+/* إطار ناعم */
+.frame{
+  background:rgba(255,255,255,0.55);
+  border-radius:30px;
+  padding:20px;
+  width:85%;
+  max-width:340px;
+  margin:12px auto;
+  text-align:center;
+  box-shadow:0 20px 45px rgba(0,0,0,0.2);
   z-index:3;
+}
+
+/* صورة داخل الإطار */
+.frame img{
+  width:190px;
+  max-width:80%;
+  border-radius:25px;
+  margin-bottom:14px;
 }
 
 /* النص تحت الصورة */
 .caption{
-  position:fixed;
-  top:55%;
-  width:100%;
-  text-align:center;
   color:#0a3d62;
   font-size:15px;
-  z-index:3;
 }
 
 /* العداد */
 .counter{
-  position:fixed;
-  bottom:12%;
-  width:100%;
-  text-align:center;
   color:#0a3d62;
   font-size:15px;
-  z-index:3;
+  line-height:1.8;
 }
 
-/* الورد */
+/* الورد المتساقط */
 .flower{
   position:fixed;
   top:-40px;
@@ -125,7 +126,7 @@ const messageText = `
 حبيت نقلك بلي هذا
 أجمل عام وأجمل نهار
 لأنك دخلتي لحياتي
-ووليتي جزء منها 🤍
+ووليتي جزء منها اسف كان كشما غلط ولا في هذا عام☝🏻🙃🙃😗
 `;
 
 let i = 0;
@@ -157,19 +158,40 @@ function typeWriter(){
 function showFinal(){
   document.getElementById("content").remove();
 
-  const img = document.createElement("img");
-  img.src = "flower.jpg";   // ← ضع صورتك JPG بنفس الاسم
-  img.className = "final-image";
-  document.body.appendChild(img);
+  /* إطار الصور + النص */
+  const frame1 = document.createElement("div");
+  frame1.className = "frame";
+
+  const images = [
+    "flower.jpg",
+    "flower1.jpg",
+    "flower2.jpg",
+    "flower3.jpg",
+    "flower4.jpg",
+    "flower5.jpg"
+  ];
+
+  images.forEach(src=>{
+    const img = document.createElement("img");
+    img.src = src;
+    frame1.appendChild(img);
+  });
 
   const caption = document.createElement("div");
   caption.className = "caption";
-  caption.innerText = "رسمتها من البي على جالك ☝🏻😔";
-  document.body.appendChild(caption);
+  caption.innerText = "رسمتها من البي لى جالك 😔☝🏻😂 لخرين اك تعرفيهم ☝🏻🙃🙃🙃";
+  frame1.appendChild(caption);
+
+  /* إطار العداد */
+  const frame2 = document.createElement("div");
+  frame2.className = "frame";
 
   const counter = document.createElement("div");
   counter.className = "counter";
-  document.body.appendChild(counter);
+  frame2.appendChild(counter);
+
+  document.body.appendChild(frame1);
+  document.body.appendChild(frame2);
 
   setInterval(()=>{
     const now = new Date();
@@ -189,7 +211,7 @@ function showFinal(){
 }
 
 function startFlowers(){
-  const flowers = ["🌸","🌷","🌼","💐"];
+  const flowers = ["🌸","🌷","🌼","💐","🎀"];
   setInterval(()=>{
     const f=document.createElement("div");
     f.className="flower";
@@ -203,4 +225,4 @@ function startFlowers(){
 </script>
 
 </body>
-  </html>
+</html>
