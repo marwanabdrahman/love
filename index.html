@@ -19,7 +19,7 @@ body{
   flex-direction:column;
 }
 
-/* صندوق عام */
+/* صناديق */
 .box,.frame,.paper{
   background:rgba(255,255,255,0.9);
   padding:24px;
@@ -29,6 +29,7 @@ body{
   max-width:360px;
   box-shadow:0 20px 45px rgba(0,0,0,0.2);
   margin:10px;
+  z-index:2;
 }
 
 /* إدخال */
@@ -52,7 +53,6 @@ button{
   font-size:15px;
   cursor:pointer;
 }
-
 .primary{background:#ff5d8f;color:white;}
 .secondary{background:#5dade2;color:white;}
 .reject{background:#eee;color:#333;}
@@ -96,27 +96,39 @@ button{
   transition:0.3s;
   z-index:999;
 }
-.sound-toggle.active{
-  opacity:1;
+.sound-toggle.active{opacity:1;}
+
+/* 🌸 قلوب وورود متساقطة */
+.falling{
+  position:fixed;
+  top:-10%;
+  font-size:22px;
+  animation:fall linear infinite;
+  opacity:0.8;
+  z-index:1;
+}
+@keyframes fall{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔊 الصوت -->
-<audio id="loveSong" loop>
+<!-- الصوت -->
+<audio id="loveSong" loop autoplay>
   <source src="melody.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 🔊 زر الصوت -->
-<div class="sound-toggle" id="soundBtn" onclick="toggleMusic()">🔊</div>
+<div class="sound-toggle active" id="soundBtn" onclick="toggleMusic()">🔊</div>
 
 <!-- المرحلة 1 -->
 <div class="box" id="login">
   <h3>💙 أدخل كلمة السر 💙</h3>
   <input id="password" placeholder="تاريخ ميلاد أفضل شخص فالدنيا ☝🏻🙃">
-  <button class="secondary" onclick="check()">دخول</button>
+  <button class="secondary" onclick="check()">تفزلي ☝🏻🙃</button>
 </div>
 
 <!-- المرحلة 2 -->
@@ -127,7 +139,7 @@ button{
 
 <!-- المرحلة 3 -->
 <div class="frame hidden" id="counterBox">
-  <img src="flower.jpg" alt="صورة">
+  <img src="flower.jpg">
   <div>رسمتها من البي على جالك ☝🏻😔😂</div>
   <div class="counter" id="counter"></div>
   <button class="primary" onclick="showPaper()">درك وقت صح اضغطي هنا ☝🏻🙃</button>
@@ -147,7 +159,7 @@ button{
   تذكّري فقط…<br>
   أن قلبي لا يعرف طريقًا بدونك 😗🙃<br><br>
 
-  <button class="primary" onclick="accept()">أوافق وبكل قلبي 🤍</button>
+  <button class="primary" onclick="accept()">أوافق وبكل قلبي ☝🏻🧸</button>
   <button class="reject" id="rejectBtn">لااا ☝🏻😂</button>
 </div>
 
@@ -173,39 +185,27 @@ const messageText=`
 `;
 
 let i=0;
-let playing=false;
+let playing=true;
+
+function toggleMusic(){
+  if(playing){song.pause();soundBtn.classList.remove("active");}
+  else{song.play();soundBtn.classList.add("active");}
+  playing=!playing;
+}
 
 function check(){
   if(password.value===correctPassword){
     login.classList.add("hidden");
     messageBox.classList.remove("hidden");
-    song.play();
-    playing=true;
-    soundBtn.classList.add("active");
     typeWriter();
-  }else{
-    alert("كلمة السر خاطئة 💔");
-  }
-}
-
-function toggleMusic(){
-  if(playing){
-    song.pause();
-    soundBtn.classList.remove("active");
-  }else{
-    song.play();
-    soundBtn.classList.add("active");
-  }
-  playing=!playing;
+  }else alert("كلمة السر خاطئة 💔");
 }
 
 function typeWriter(){
   if(i<messageText.length){
     typed.innerHTML+=messageText.charAt(i++);
     setTimeout(typeWriter,80);
-  }else{
-    nextBtn.classList.remove("hidden");
-  }
+  }else nextBtn.classList.remove("hidden");
 }
 
 function showFinal(){
@@ -220,27 +220,36 @@ function showFinal(){
     diff%=3600;
     const m=Math.floor(diff/60);
     const s=diff%60;
-    counter.innerHTML=
-      `أجمل أيامي بدأت منذ 🤍<br>${d} يوم • ${h} ساعة • ${m} دقيقة • ${s} ثانية`;
+    counter.innerHTML=`أجمل أيامي بدأت منذ 🤍<br>${d} يوم • ${h} ساعة • ${m} دقيقة • ${s} ثانية`;
   },1000);
 }
 
 function showPaper(){
   counterBox.classList.add("hidden");
   paper.classList.remove("hidden");
-  song.pause();
-  soundBtn.classList.remove("active");
-  playing=false;
 }
 
 function accept(){
-  const today=new Date().toLocaleDateString("ar-DZ");
   paper.innerHTML=`
-    🤍 تم الوعد 🤍<br><br>
-    روان وافقت بتاريخ: ${today}<br>
-    مروان وافق بتاريخ: 28/02/2025<br><br>
-    مروان كان هنا… وواقف ومستنيك 🙃😂
+    <img src="promise.png" style="width:100%;border-radius:20px"><br><br>
+    🤍 تم الوعد 🤍<br>
+    روان وافقت بتاريخ: 28/02/2026<br>
+    مروان وافق بتاريخ: 28/02/2025
   `;
+  startFalling();
+}
+
+function startFalling(){
+  const icons=["🤍","🌸","🌷","💗"];
+  setInterval(()=>{
+    const el=document.createElement("div");
+    el.className="falling";
+    el.innerText=icons[Math.floor(Math.random()*icons.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDuration=(4+Math.random()*4)+"s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),8000);
+  },300);
 }
 
 rejectBtn.onclick=()=>{
