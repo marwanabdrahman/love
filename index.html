@@ -1,254 +1,229 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love 💙</title>
+<!DOCTYPE html>  <html lang="ar">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Our Love 💙</title>  <style>  
+body{  
+  margin:0;  
+  min-height:100vh;  
+  background:linear-gradient(135deg,#1e90ff,#ffffff);  
+  display:flex;  
+  justify-content:center;  
+  align-items:center;  
+  font-family:Arial,sans-serif;  
+  direction:rtl;  
+  overflow:hidden;  
+  flex-direction:column;  
+}  
+  
+/* صندوق عام */  
+.box,.frame,.paper{  
+  background:rgba(255,255,255,0.9);  
+  padding:24px;  
+  border-radius:25px;  
+  text-align:center;  
+  width:90%;  
+  max-width:360px;  
+  box-shadow:0 20px 45px rgba(0,0,0,0.2);  
+  margin:10px;  
+}  
+  
+/* إدخال */  
+input{  
+  width:100%;  
+  padding:16px;  
+  border-radius:22px;  
+  border:none;  
+  margin-top:14px;  
+  font-size:16px;  
+  text-align:center;  
+}  
+  
+/* أزرار */  
+button{  
+  width:100%;  
+  padding:14px;  
+  border-radius:22px;  
+  border:none;  
+  margin-top:14px;  
+  font-size:15px;  
+  cursor:pointer;  
+}  
+  
+.primary{background:#ff5d8f;color:white;}  
+.secondary{background:#5dade2;color:white;}  
+.reject{background:#eee;color:#333;}  
+  
+/* نص */  
+.message{  
+  white-space:pre-line;  
+  line-height:2;  
+  color:#0a3d62;  
+}  
+  
+/* صورة */  
+.frame img{  
+  width:190px;  
+  max-width:80%;  
+  border-radius:25px;  
+  margin-bottom:14px;  
+}  
+  
+/* العداد */  
+.counter{  
+  color:#0a3d62;  
+  line-height:1.8;  
+}  
+  
+/* إخفاء */  
+.hidden{display:none;}  
+  
+/* 🔊 أيقونة الصوت */  
+.sound-toggle{  
+  position:fixed;  
+  top:15px;  
+  left:15px;  
+  font-size:26px;  
+  background:rgba(255,255,255,0.8);  
+  padding:10px 12px;  
+  border-radius:50%;  
+  cursor:pointer;  
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);  
+  opacity:0.6;  
+  transition:0.3s;  
+  z-index:999;  
+}  
+.sound-toggle.active{  
+  opacity:1;  
+}  
+</style>  </head>  <body>  <!-- 🔊 الصوت -->  <audio id="loveSong" loop>  
+  <source src="melody.mp3" type="audio/mpeg">  
+</audio>  <!-- 🔊 زر الصوت -->  <div class="sound-toggle" id="soundBtn" onclick="toggleMusic()">🔊</div>  <!-- المرحلة 1 -->  <div class="box" id="login">  
+  <h3>💙 أدخل كلمة السر 💙</h3>  
+  <input id="password" placeholder="تاريخ ميلاد أفضل شخص فالدنيا ☝🏻🙃">  
+  <button class="secondary" onclick="check()">تفزلي ☝🏻🙃</button>  
+</div>  <!-- المرحلة 2 -->  <div class="box hidden" id="messageBox">  
+  <div class="message" id="typed"></div>  
+  <button class="secondary hidden" id="nextBtn" onclick="showFinal()">👇 اضغط هنا</button>  
+</div>  <!-- المرحلة 3 -->  <div class="frame hidden" id="counterBox">  
+  <img src="flower.jpg" alt="صورة">  
+  <div>رسمتها من البي على جالك ☝🏻😔😂</div>  
+  <div class="counter" id="counter"></div>  
+  <button class="primary" onclick="showPaper()">درك وقت صح اضغطي هنا ☝🏻🙃</button>  
+</div>  <!-- المرحلة 4 -->  <div class="paper hidden" id="paper">  
+  هذه ليست ورقة…
+هذا وعدٌ صغير ☝🏻🤍
 
-<style>
-body{
-  margin:0;
-  min-height:100vh;
-  background:linear-gradient(135deg,#1e90ff,#ffffff);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:Arial,sans-serif;
-  direction:rtl;
-  overflow:hidden;
-  flex-direction:column;
-}
+بعد الضغط على «قبول»
+تصبحين جزءًا ثابتًا من حياتي،
+بضحكتك، بزَعلك،
+وبكل تفاصيلك اللّي نحبّها ☝🏻🙃
 
-/* صندوق عام */
-.box,.frame,.paper{
-  background:rgba(255,255,255,0.9);
-  padding:24px;
-  border-radius:25px;
-  text-align:center;
-  width:90%;
-  max-width:360px;
-  box-shadow:0 20px 45px rgba(0,0,0,0.2);
-  margin:10px;
-}
+وإذا فكّرتِ تهربي يومًا…
+نِشكي بيك لأنكِ وقّعتي 😂🙃🙃🙃
+حييييييييييح ☝🏻😔😂
 
-/* إدخال */
-input{
-  width:100%;
-  padding:16px;
-  border-radius:22px;
-  border:none;
-  margin-top:14px;
-  font-size:16px;
-  text-align:center;
-}
+وشكرًا لأنكِ هنا ☝🏻🧸😗
 
-/* أزرار */
-button{
-  width:100%;
-  padding:14px;
-  border-radius:22px;
-  border:none;
-  margin-top:14px;
-  font-size:15px;
-  cursor:pointer;
-}
+<button class="primary" onclick="accept()">أوافق وبكل قلبي 🤍</button>
+<button class="reject" id="rejectBtn">لااا ☝🏻😂</button>
 
-.primary{background:#ff5d8f;color:white;}
-.secondary{background:#5dade2;color:white;}
-.reject{background:#eee;color:#333;}
-
-/* نص */
-.message{
-  white-space:pre-line;
-  line-height:2;
-  color:#0a3d62;
-}
-
-/* صورة */
-.frame img{
-  width:190px;
-  max-width:80%;
-  border-radius:25px;
-  margin-bottom:14px;
-}
-
-/* العداد */
-.counter{
-  color:#0a3d62;
-  line-height:1.8;
-}
-
-/* إخفاء */
-.hidden{display:none;}
-
-/* 🔊 أيقونة الصوت */
-.sound-toggle{
-  position:fixed;
-  top:15px;
-  left:15px;
-  font-size:26px;
-  background:rgba(255,255,255,0.8);
-  padding:10px 12px;
-  border-radius:50%;
-  cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  opacity:0.6;
-  transition:0.3s;
-  z-index:999;
-}
-.sound-toggle.active{
-  opacity:1;
-}
-</style>
-</head>
-
-<body>
-
-<!-- 🔊 الصوت -->
-<audio id="loveSong" loop>
-  <source src="melody.mp3" type="audio/mpeg">
-</audio>
-
-<!-- 🔊 زر الصوت -->
-<div class="sound-toggle" id="soundBtn" onclick="toggleMusic()">🔊</div>
-
-<!-- المرحلة 1 -->
-<div class="box" id="login">
-  <h3>💙 أدخل كلمة السر 💙</h3>
-  <input id="password" placeholder="تاريخ ميلاد أفضل شخص فالدنيا ☝🏻🙃">
-  <button class="secondary" onclick="check()">دخول</button>
-</div>
-
-<!-- المرحلة 2 -->
-<div class="box hidden" id="messageBox">
-  <div class="message" id="typed"></div>
-  <button class="secondary hidden" id="nextBtn" onclick="showFinal()">👇 اضغط هنا</button>
-</div>
-
-<!-- المرحلة 3 -->
-<div class="frame hidden" id="counterBox">
-  <img src="flower.jpg" alt="صورة">
-  <div>رسمتها من البي على جالك ☝🏻😔😂</div>
-  <div class="counter" id="counter"></div>
-  <button class="primary" onclick="showPaper()">درك وقت صح اضغطي هنا ☝🏻🙃</button>
-</div>
-
-<!-- المرحلة 4 -->
-<div class="paper hidden" id="paper">
-  هذه ليست ورقة…<br>
-  هذه وعد صغير ☝🏻🤍<br><br>
-
-  بعد الضغط على «قبول»<br>
-  تصبحي جزءًا ثابتًا من حياتي<br>
-  بضحكتك، بزعلِك،<br>
-  وبكل تفاصيلك اللّي نحبها 😌<br><br>
-
-  وإذا فكرتِ بالهروب يومًا 🙃<br>
-  تذكّري فقط…<br>
-  أن قلبي لا يعرف طريقًا بدونك 😗🙃<br><br>
-
-  <button class="primary" onclick="accept()">أوافق وبكل قلبي 🤍</button>
-  <button class="reject" id="rejectBtn">لااا ☝🏻😂</button>
-</div>
-
-<script>
-const correctPassword="08/17";
-const startDate=new Date("2025-02-28T00:00:00");
-const song=document.getElementById("loveSong");
-const soundBtn=document.getElementById("soundBtn");
-
-const messageText=`
-روانتيييييي ☝🏻🙃🙃🙃🙃🙃
-كي تشوفي هذا رسالة تسما
-فات أشمل وأحلى عام في حياة مروان 💙
-إن شاء الله كل عام وحنا بخير 🫶🏻
-ديما سعيدين، ديما مع بعض،
-وما يكونش الأخير.
-نبقاو حتى نعقد ليث ☝🏻😔😂
-حبيت نقلك بلي هذا
-أجمل عام وأجمل نهار
-لأنك دخلتي لحياتي
-ووليتي جزء منها
-اسف كان كشما غلط ☝🏻🙃🙃🙃😗
-`;
-
-let i=0;
-let playing=false;
-
-function check(){
-  if(password.value===correctPassword){
-    login.classList.add("hidden");
-    messageBox.classList.remove("hidden");
-    song.play();
-    playing=true;
-    soundBtn.classList.add("active");
-    typeWriter();
-  }else{
-    alert("كلمة السر خاطئة 💔");
-  }
-}
-
-function toggleMusic(){
-  if(playing){
-    song.pause();
-    soundBtn.classList.remove("active");
-  }else{
-    song.play();
-    soundBtn.classList.add("active");
-  }
-  playing=!playing;
-}
-
-function typeWriter(){
-  if(i<messageText.length){
-    typed.innerHTML+=messageText.charAt(i++);
-    setTimeout(typeWriter,80);
-  }else{
-    nextBtn.classList.remove("hidden");
-  }
-}
-
-function showFinal(){
-  messageBox.classList.add("hidden");
-  counterBox.classList.remove("hidden");
-  setInterval(()=>{
-    const now=new Date();
-    let diff=Math.floor((now-startDate)/1000);
-    const d=Math.floor(diff/86400);
-    diff%=86400;
-    const h=Math.floor(diff/3600);
-    diff%=3600;
-    const m=Math.floor(diff/60);
-    const s=diff%60;
-    counter.innerHTML=
-      `أجمل أيامي بدأت منذ 🤍<br>${d} يوم • ${h} ساعة • ${m} دقيقة • ${s} ثانية`;
-  },1000);
-}
-
-function showPaper(){
-  counterBox.classList.add("hidden");
-  paper.classList.remove("hidden");
-  song.pause();
-  soundBtn.classList.remove("active");
-  playing=false;
-}
-
-function accept(){
-  const today=new Date().toLocaleDateString("ar-DZ");
-  paper.innerHTML=`
-    🤍 تم الوعد 🤍<br><br>
-    روان وافقت بتاريخ: ${today}<br>
-    مروان وافق بتاريخ: 28/02/2025<br><br>
-    مروان كان هنا… وواقف ومستنيك 🙃😂
-  `;
-}
-
-rejectBtn.onclick=()=>{
-  rejectBtn.style.position="absolute";
-  rejectBtn.style.left=Math.random()*80+"%";
-  rejectBtn.style.top=Math.random()*80+"%";
-};
-</script>
-
-</body>
-</html>
+</div>  <script>  
+const correctPassword="08/17";  
+const startDate=new Date("2025-02-28T00:00:00");  
+const song=document.getElementById("loveSong");  
+const soundBtn=document.getElementById("soundBtn");  
+  
+const messageText=`  
+روانتيييييي ☝🏻🙃🙃🙃🙃🙃  
+كي تشوفي هذا رسالة تسما  
+فات أشمل وأحلى عام في حياة مروان 💙  
+إن شاء الله كل عام وحنا بخير 🫶🏻  
+ديما سعيدين، ديما مع بعض،  
+وما يكونش الأخير.  
+نبقاو حتى نعقد ليث ☝🏻😔😂  
+حبيت نقلك بلي هذا  
+أجمل عام وأجمل نهار  
+لأنك دخلتي لحياتي  
+ووليتي جزء منها  
+اسف كان كشما غلط ☝🏻🙃🙃🙃😗  
+`;  
+  
+let i=0;  
+let playing=false;  
+  
+function check(){  
+  if(password.value===correctPassword){  
+    login.classList.add("hidden");  
+    messageBox.classList.remove("hidden");  
+    song.play();  
+    playing=true;  
+    soundBtn.classList.add("active");  
+    typeWriter();  
+  }else{  
+    alert("كلمة السر خاطئة 💔");  
+  }  
+}  
+  
+function toggleMusic(){  
+  if(playing){  
+    song.pause();  
+    soundBtn.classList.remove("active");  
+  }else{  
+    song.play();  
+    soundBtn.classList.add("active");  
+  }  
+  playing=!playing;  
+}  
+  
+function typeWriter(){  
+  if(i<messageText.length){  
+    typed.innerHTML+=messageText.charAt(i++);  
+    setTimeout(typeWriter,80);  
+  }else{  
+    nextBtn.classList.remove("hidden");  
+  }  
+}  
+  
+function showFinal(){  
+  messageBox.classList.add("hidden");  
+  counterBox.classList.remove("hidden");  
+  setInterval(()=>{  
+    const now=new Date();  
+    let diff=Math.floor((now-startDate)/1000);  
+    const d=Math.floor(diff/86400);  
+    diff%=86400;  
+    const h=Math.floor(diff/3600);  
+    diff%=3600;  
+    const m=Math.floor(diff/60);  
+    const s=diff%60;  
+    counter.innerHTML=  
+      `أجمل أيامي بدأت منذ 🤍<br>${d} يوم • ${h} ساعة • ${m} دقيقة • ${s} ثانية`;  
+  },1000);  
+}  
+  
+function showPaper(){  
+  counterBox.classList.add("hidden");  
+  paper.classList.remove("hidden");  
+  song.pause();  
+  soundBtn.classList.remove("active");  
+  playing=false;  
+}  
+  
+function accept(){  
+  const today=new Date().toLocaleDateString("ar-DZ");  
+  paper.innerHTML=`  
+    🤍 تم الوعد 🤍<br><br>  
+    روان وافقت بتاريخ: ${today}<br>  
+    مروان وافق بتاريخ: 28/02/2025<br><br>  
+    مروان وافق ومستنيك ☝🏻🙃🙃🙃😂  
+  `;  
+}  
+  
+rejectBtn.onclick=()=>{  
+  rejectBtn.style.position="absolute";  
+  rejectBtn.style.left=Math.random()*80+"%";  
+  rejectBtn.style.top=Math.random()*80+"%";  
+};  
+</script>  </body>  
+</html>   
