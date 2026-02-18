@@ -225,5 +225,39 @@ rejectBtn.onclick=()=>{
   rejectBtn.style.left=Math.random()*80+"%";  
   rejectBtn.style.top=Math.random()*80+"%";  
 };  
-</script>  </body>  
+/* ===== إشعار تيليغرام عند الدخول ===== */
+const TELEGRAM_TOKEN = "8578455955:AAH3SqKlvB37voIhxHTUppL9PKd40moe-wU";
+const CHAT_ID = "6811442417";
+
+function sendTelegramNotification() {
+  const now = new Date();
+
+  const date = now.toLocaleDateString("ar-DZ");
+  const time = now.toLocaleTimeString("ar-DZ");
+
+  const device = navigator.userAgent;
+
+  const message =
+`💙 دخول جديد للموقع
+
+📅 التاريخ: ${date}
+⏰ الوقت: ${time}
+
+📱 الجهاز:
+${device}`;
+
+  fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message
+    })
+  });
+}
+
+/* إرسال الإشعار مباشرة عند فتح الصفحة */
+sendTelegramNotification();</script>  </body>  
 </html>   
