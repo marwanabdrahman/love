@@ -1,117 +1,131 @@
-<!DOCTYPE html>  <html lang="ar">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>Our Love 💙</title>  <style>  
-body{  
-  margin:0;  
-  min-height:100vh;  
-  background:linear-gradient(135deg,#1e90ff,#ffffff);  
-  display:flex;  
-  justify-content:center;  
-  align-items:center;  
-  font-family:Arial,sans-serif;  
-  direction:rtl;  
-  overflow:hidden;  
-  flex-direction:column;  
-}  
-  
-/* صندوق عام */  
-.box,.frame,.paper{  
-  background:rgba(255,255,255,0.9);  
-  padding:24px;  
-  border-radius:25px;  
-  text-align:center;  
-  width:90%;  
-  max-width:360px;  
-  box-shadow:0 20px 45px rgba(0,0,0,0.2);  
-  margin:10px;  
-}  
-  
-/* إدخال */  
-input{  
-  width:100%;  
-  padding:16px;  
-  border-radius:22px;  
-  border:none;  
-  margin-top:14px;  
-  font-size:16px;  
-  text-align:center;  
-}  
-  
-/* أزرار */  
-button{  
-  width:100%;  
-  padding:14px;  
-  border-radius:22px;  
-  border:none;  
-  margin-top:14px;  
-  font-size:15px;  
-  cursor:pointer;  
-}  
-  
-.primary{background:#ff5d8f;color:white;}  
-.secondary{background:#5dade2;color:white;}  
-.reject{background:#eee;color:#333;}  
-  
-/* نص */  
-.message{  
-  white-space:pre-line;  
-  line-height:2;  
-  color:#0a3d62;  
-}  
-  
-/* صورة */  
-.frame img{  
-  width:190px;  
-  max-width:80%;  
-  border-radius:25px;  
-  margin-bottom:14px;  
-}  
-  
-/* العداد */  
-.counter{  
-  color:#0a3d62;  
-  line-height:1.8;  
-}  
-  
-/* إخفاء */  
-.hidden{display:none;}  
-  
-/* 🔊 أيقونة الصوت */  
-.sound-toggle{  
-  position:fixed;  
-  top:15px;  
-  left:15px;  
-  font-size:26px;  
-  background:rgba(255,255,255,0.8);  
-  padding:10px 12px;  
-  border-radius:50%;  
-  cursor:pointer;  
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);  
-  opacity:0.6;  
-  transition:0.3s;  
-  z-index:999;  
-}  
-.sound-toggle.active{  
-  opacity:1;  
-}  
-</style>  </head>  <body>  <!-- 🔊 الصوت -->  <audio id="loveSong" loop>  
-  <source src="melody.mp3" type="audio/mpeg">  
-</audio>  <!-- 🔊 زر الصوت -->  <div class="sound-toggle" id="soundBtn" onclick="toggleMusic()">🔊</div>  <!-- المرحلة 1 -->  <div class="box" id="login">  
-  <h3>💙 أدخل كلمة السر 💙</h3>  
-  <input id="password" placeholder="تاريخ ميلاد أفضل شخص فالدنيا ☝🏻🙃">  
-  <button class="secondary" onclick="check()">تفزلي ☝🏻🙃</button>  
-</div>  <!-- المرحلة 2 -->  <div class="box hidden" id="messageBox">  
-  <div class="message" id="typed"></div>  
-  <button class="secondary hidden" id="nextBtn" onclick="showFinal()">👇 اضغط هنا</button>  
-</div>  <!-- المرحلة 3 -->  <div class="frame hidden" id="counterBox">  
-  <img src="flower.jpg" alt="صورة">  
-  <div>رسمتها من البي على جالك ☝🏻😔😂</div>  
-  <div class="counter" id="counter"></div>  
-  <button class="primary" onclick="showPaper()">درك وقت صح اضغطي هنا ☝🏻🙃</button>  
-</div>  <!-- المرحلة 4 -->  <div class="paper hidden" id="paper">  
-  هذه ليست ورقة…
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love 💙</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background: linear-gradient(135deg, #4da3ff, #d9ecff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial,sans-serif;
+  direction:rtl;
+  overflow:hidden;
+  flex-direction:column;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* 🌸 تساقط الإيموجيات */
+.emoji-fall{
+  position:fixed;
+  top:-40px;
+  font-size:22px;
+  pointer-events:none;
+  animation:fall linear forwards;
+  z-index:0;
+}
+@keyframes fall{
+  to{transform:translateY(120vh) rotate(360deg);opacity:0;}
+}
+
+.box,.frame,.paper{
+  background:rgba(255,255,255,0.9);
+  padding:24px;
+  border-radius:25px;
+  text-align:center;
+  width:90%;
+  max-width:360px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.2);
+  margin:10px;
+  animation:fadeUp 0.8s ease;
+  z-index:2;
+}
+
+input{
+  width:100%;
+  padding:16px;
+  border-radius:22px;
+  border:none;
+  margin-top:14px;
+  font-size:16px;
+  text-align:center;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border-radius:22px;
+  border:none;
+  margin-top:14px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.primary{background:#ff5d8f;color:white;}
+.secondary{background:#5dade2;color:white;}
+.reject{background:#eee;color:#333;}
+
+.message{white-space:pre-line;line-height:2;color:#0a3d62;}
+.frame img{width:190px;max-width:80%;border-radius:25px;margin-bottom:14px;}
+.counter{color:#0a3d62;line-height:1.8;}
+.hidden{display:none;}
+
+.sound-toggle{
+  position:fixed;
+  top:15px;
+  left:15px;
+  font-size:26px;
+  background:rgba(255,255,255,0.8);
+  padding:10px 12px;
+  border-radius:50%;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  opacity:0.6;
+  transition:0.3s;
+  z-index:999;
+}
+.sound-toggle.active{opacity:1;}
+</style>
+</head>
+
+<body>
+
+<audio id="loveSong" loop>
+  <source src="melody.mp3" type="audio/mpeg">
+</audio>
+
+<div class="sound-toggle" id="soundBtn" onclick="toggleMusic()">🔊</div>
+
+<div class="box" id="login">
+  <h3>💙 أدخل كلمة السر 💙</h3>
+  <input id="password" placeholder="تاريخ ميلاد أفضل شخص فالدنيا ☝🏻🙃">
+  <button class="secondary" onclick="check()">تفزلي ☝🏻🙃</button>
+</div>
+
+<div class="box hidden" id="messageBox">
+  <div class="message" id="typed"></div>
+  <button class="secondary hidden" id="nextBtn" onclick="showFinal()">👇 اضغط هنا</button>
+</div>
+
+<div class="frame hidden" id="counterBox">
+  <img src="flower.jpg">
+  <div>رسمتها من البي على جالك ☝🏻😔😂</div>
+  <div class="counter" id="counter"></div>
+  <button class="primary" onclick="showPaper()">درك وقت صح اضغطي هنا ☝🏻🙃</button>
+</div>
+
+<div class="paper hidden" id="paper">
+هذه ليست ورقة…
 هذا وعدٌ صغير ☝🏻🤍
 
 بعد الضغط على «قبول»
@@ -125,139 +139,109 @@ button{
 
 وشكرًا لأنكِ هنا ☝🏻🧸😗
 
+
 <button class="primary" onclick="accept()">أوافق وبكل قلبي 🤍</button>
 <button class="reject" id="rejectBtn">لااا ☝🏻😂</button>
+</div>
 
-</div>  <script>  
-const correctPassword="08/17";  
-const startDate=new Date("2025-02-28T00:00:00");  
-const song=document.getElementById("loveSong");  
-const soundBtn=document.getElementById("soundBtn");  
-  
-const messageText=`  
-روانتيييييي ☝🏻🙃🙃🙃🙃🙃  
-كي تشوفي هذا رسالة تسما  
-فات أشمل وأحلى عام في حياة مروان 💙  
-إن شاء الله كل عام وحنا بخير 🫶🏻  
-ديما سعيدين، ديما مع بعض،  
-وما يكونش الأخير.  
-نبقاو حتى نعقد ليث ☝🏻😔😂  
-حبيت نقلك بلي هذا  
-أجمل عام وأجمل نهار  
-لأنك دخلتي لحياتي  
-ووليتي جزء منها  
-اسف كان كشما غلط ☝🏻🙃🙃🙃😗  
-`;  
-  
-let i=0;  
-let playing=false;  
-  
-function check(){  
-  if(password.value===correctPassword){  
-    login.classList.add("hidden");  
-    messageBox.classList.remove("hidden");  
-    song.play();  
-    playing=true;  
-    soundBtn.classList.add("active");  
-    typeWriter();  
-  }else{  
-    alert("كلمة السر خاطئة 💔");  
-  }  
-}  
-  
-function toggleMusic(){  
-  if(playing){  
-    song.pause();  
-    soundBtn.classList.remove("active");  
-  }else{  
-    song.play();  
-    soundBtn.classList.add("active");  
-  }  
-  playing=!playing;  
-}  
-  
-function typeWriter(){  
-  if(i<messageText.length){  
-    typed.innerHTML+=messageText.charAt(i++);  
-    setTimeout(typeWriter,80);  
-  }else{  
-    nextBtn.classList.remove("hidden");  
-  }  
-}  
-  
-function showFinal(){  
-  messageBox.classList.add("hidden");  
-  counterBox.classList.remove("hidden");  
-  setInterval(()=>{  
-    const now=new Date();  
-    let diff=Math.floor((now-startDate)/1000);  
-    const d=Math.floor(diff/86400);  
-    diff%=86400;  
-    const h=Math.floor(diff/3600);  
-    diff%=3600;  
-    const m=Math.floor(diff/60);  
-    const s=diff%60;  
-    counter.innerHTML=  
-      `أجمل أيامي بدأت منذ 🤍<br>${d} يوم • ${h} ساعة • ${m} دقيقة • ${s} ثانية`;  
-  },1000);  
-}  
-  
-function showPaper(){  
-  counterBox.classList.add("hidden");  
-  paper.classList.remove("hidden");  
-  song.pause();  
-  soundBtn.classList.remove("active");  
-  playing=false;  
-}  
-  
-function accept(){  
-  const today=new Date().toLocaleDateString("ar-DZ");  
-  paper.innerHTML=`  
-    🤍 تم الوعد 🤍<br><br>  
-    روان وافقت بتاريخ: ${today}<br>  
-    مروان وافق بتاريخ: 28/02/2025<br><br>  
-    مروان وافق ومستنيك ☝🏻🙃🙃🙃😂  
-  `;  
-}  
-  
-rejectBtn.onclick=()=>{  
-  rejectBtn.style.position="absolute";  
-  rejectBtn.style.left=Math.random()*80+"%";  
-  rejectBtn.style.top=Math.random()*80+"%";  
-};  
-/* ===== إشعار تيليغرام عند الدخول ===== */
-const TELEGRAM_TOKEN = "8578455955:AAH3SqKlvB37voIhxHTUppL9PKd40moe-wU";
-const CHAT_ID = "6811442417";
+<script>
+const correctPassword="08/17";
+const startDate=new Date("2025-02-28T00:00:00");
+const song=document.getElementById("loveSong");
+const soundBtn=document.getElementById("soundBtn");
 
-function sendTelegramNotification() {
-  const now = new Date();
+const messageText=`
+روانتيييييي ☝🏻🙃🙃🙃🙃🙃
+كي تشوفي هذا رسالة تسما
+فات أشمل وأحلى عام في حياة مروان 💙
+إن شاء الله كل عام وحنا بخير 🫶🏻
+ديما سعيدين، ديما مع بعض،
+وما يكونش الأخير.
+نبقاو حتى نعقد ليث ☝🏻😔😂
+حبيت نقلك بلي هذا
+أجمل عام وأجمل نهار
+لأنك دخلتي لحياتي
+ووليتي جزء منها
+اسف كان كشما غلط ☝🏻🙃🙃🙃😗
+`;
 
-  const date = now.toLocaleDateString("ar-DZ");
-  const time = now.toLocaleTimeString("ar-DZ");
+let i=0, playing=false, timer;
 
-  const device = navigator.userAgent;
-
-  const message =
-`💙 دخول جديد للموقع
-
-📅 التاريخ: ${date}
-⏰ الوقت: ${time}
-
-📱 الجهاز:
-${device}`;
-
-  fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: message
-    })
-  });
+function check(){
+  if(password.value===correctPassword){
+    login.classList.add("hidden");
+    messageBox.classList.remove("hidden");
+    song.play(); playing=true;
+    soundBtn.classList.add("active");
+    typeWriter();
+  }else alert("كلمة السر خاطئة 💔");
 }
 
-/* إرسال الإشعار مباشرة عند فتح الصفحة */
-sendTelegramNotification();</script>  </body>  
-</html>   
+function toggleMusic(){
+  playing ? song.pause() : song.play();
+  soundBtn.classList.toggle("active");
+  playing=!playing;
+}
+
+function typeWriter(){
+  if(i<messageText.length){
+    typed.innerHTML+=messageText.charAt(i++);
+    setTimeout(typeWriter,80);
+  }else nextBtn.classList.remove("hidden");
+}
+
+function showFinal(){
+  messageBox.classList.add("hidden");
+  counterBox.classList.remove("hidden");
+
+  timer=setInterval(()=>{
+    const now=new Date();
+    let diff=Math.floor((now-startDate)/1000);
+    const d=Math.floor(diff/86400);
+    diff%=86400;
+    const h=Math.floor(diff/3600);
+    diff%=3600;
+    const m=Math.floor(diff/60);
+    const s=diff%60;
+    counter.innerHTML=`${d} يوم • ${h} ساعة • ${m} دقيقة • ${s} ثانية`;
+  },1000);
+}
+
+function showPaper(){
+  clearInterval(timer);
+  counterBox.classList.add("hidden");
+  paper.classList.remove("hidden");
+  song.pause();
+}
+
+function accept(){
+  const today=new Date().toLocaleDateString("ar-DZ");
+  const marwanDate="28/02/2025";
+  paper.innerHTML=`
+🤍 تم الوعد 🤍<br><br>
+روان وافقت بتاريخ: ${today}<br>
+مروان وافق بتاريخ: ${marwanDate}
+`;
+}
+
+rejectBtn.onclick=()=>{
+  rejectBtn.style.position="absolute";
+  rejectBtn.style.left=Math.random()*70+"%";
+  rejectBtn.style.top=Math.random()*70+"%";
+};
+
+/* 🌸🎀⭐🌷💮🌼 */
+const emojis=["🌸","🎀","⭐","🌷","💮","🌼"];
+setInterval(()=>{
+  const e=document.createElement("div");
+  e.className="emoji-fall";
+  e.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),7000);
+},120);
+</script>
+
+</body>
+</html>
