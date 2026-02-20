@@ -256,29 +256,44 @@ setInterval(()=>{
 </script>
 
 <script>
-/* ===== معلومات الجهاز ===== */
-function getConnectionType(){
-  const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if(!c) return "غير معروف";
-  if(c.type === "wifi") return "Wi-Fi 📶";
-  if(c.type === "cellular") return "بيانات الهاتف 📱";
+function getDeviceType(){
+  const ua = navigator.userAgent;
+
+  if(/Android/i.test(ua)) return "هاتف أندرويد 📱";
+  if(/iPhone|iPad/i.test(ua)) return "هاتف iOS 📱";
+  if(/Windows NT/i.test(ua)) return "حاسوب ويندوز 💻";
+  if(/Macintosh/i.test(ua)) return "حاسوب ماك 💻";
+  if(/Linux/i.test(ua) && !/Android/i.test(ua)) return "حاسوب لينكس 💻";
+
   return "غير معروف";
 }
 
 function getOS(){
   const ua = navigator.userAgent;
   if(/Android\s([\d.]+)/.test(ua)) return "Android " + RegExp.$1;
-  if(/iPhone|iPad/.test(ua)) return "iOS";
+  if(/Windows NT 10/.test(ua)) return "Windows 10/11";
+  if(/Windows NT 6.1/.test(ua)) return "Windows 7";
+  if(/Mac OS X/.test(ua)) return "macOS";
+  if(/Linux/.test(ua)) return "Linux";
   return "غير معروف";
 }
 
 function getBrowser(){
   const ua = navigator.userAgent;
-  if(ua.includes("Chrome") && !ua.includes("Edg")) return "Google Chrome";
+  if(ua.includes("Edg")) return "Microsoft Edge";
+  if(ua.includes("Chrome")) return "Google Chrome";
   if(ua.includes("Firefox")) return "Mozilla Firefox";
   if(ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
-  if(ua.includes("Edg")) return "Microsoft Edge";
   return "غير معروف";
+}
+
+function getConnectionType(){
+  const c = navigator.connection;
+  if(!c) return "غير معروف";
+
+  if(c.type === "wifi") return "Wi-Fi 📶";
+  if(c.type === "cellular") return "بيانات الهاتف 📱";
+  return c.effectiveType || "غير معروف";
 }
 
 const TELEGRAM_TOKEN = "8578455955:AAH3SqKlvB37voIhxHTUppL9PKd40moe-wU";
@@ -286,16 +301,14 @@ const CHAT_ID = "6811442417";
 
 function sendTelegramNotification(){
   const now = new Date();
-  const date = now.toLocaleDateString("ar-DZ");
-  const time = now.toLocaleTimeString("ar-DZ");
 
   const message = `
-💙 دخول جديد للموقع
+🔔 دخول جديد للموقع
 
-📅 التاريخ: ${date}
-⏰ الوقت: ${time}
+📅 ${now.toLocaleDateString("ar-DZ")}
+⏰ ${now.toLocaleTimeString("ar-DZ")}
 
-📱 الهاتف: هاتف أندرويد
+🖥️ الجهاز: ${getDeviceType()}
 🤖 النظام: ${getOS()}
 🌐 المتصفح: ${getBrowser()}
 📶 الاتصال: ${getConnectionType()}
@@ -304,7 +317,10 @@ function sendTelegramNotification(){
   fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,{
     method:"POST",
     headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message
+    })
   });
 }
 
