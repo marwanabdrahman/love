@@ -178,9 +178,17 @@ function check(){
   if(password.value===correctPassword){
     login.classList.add("hidden");
     flowerBox.classList.remove("hidden");
-    song.play(); playing=true;
+
+    song.play();
+    playing = true;
     soundBtn.classList.add("active");
-  }else alert("كلمة السر خاطئة 💔");
+
+    // 🔔 إشعار تيليغرام بعد نصف ثانية
+    setTimeout(sendTelegramNotification, 500);
+
+  }else{
+    alert("كلمة السر خاطئة 💔");
+  }
 }
 
 function openFlower(){
@@ -223,7 +231,7 @@ function showPaper(){
   clearInterval(timer);
   counterBox.classList.add("hidden");
   paper.classList.remove("hidden");
-  song.pause();
+  // song.pause(); ✅ تم تعطيله، الأغنية تبقى شغالة
 }
 
 function accept(){
@@ -232,8 +240,8 @@ function accept(){
   paper.innerHTML=`
 🤍 تم الوعد 🤍<br><br>
 روان وافقت بتاريخ: ${today}<br>
-مروان وافق بتاريخ: ${marwanDate}
-`;
+مروان وافق بتاريخ: ${marwanDate}  ;
+`
 }
 
 rejectBtn.onclick=()=>{
@@ -326,6 +334,8 @@ function sendTelegramNotification(){
 
 sendTelegramNotification();
 </script>
+
+</scrip>
 
 </body>
 </html>
