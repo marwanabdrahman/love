@@ -243,5 +243,82 @@ setInterval(()=>{
 },120);
 </script>
 
-</body>
+<script>
+/* ===== معلومات الجهاز ===== */
+
+// نوع الاتصال
+function getConnectionType(){
+  const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if(!c) return "غير معروف";
+
+  if(c.type === "wifi") return "Wi-Fi 📶";
+  if(c.type === "cellular") return "بيانات الهاتف 📱";
+
+  if(c.effectiveType){
+    if(c.effectiveType.includes("5g") || c.effectiveType.includes("4g"))
+      return "بيانات الهاتف 📱";
+    if(c.effectiveType.includes("3g") || c.effectiveType.includes("2g"))
+      return "بيانات الهاتف (ضعيف) 📱";
+  }
+  return "غير معروف";
+}
+
+// استخراج النظام
+function getOS(){
+  const ua = navigator.userAgent;
+  if(/Android\s([\d.]+)/.test(ua)) return "Android " + RegExp.$1;
+  if(/iPhone|iPad/.test(ua)) return "iOS";
+  return "غير معروف";
+}
+
+// استخراج المتصفح
+function getBrowser(){
+  const ua = navigator.userAgent;
+  if(ua.includes("Chrome") && !ua.includes("Edg")) return "Google Chrome";
+  if(ua.includes("Firefox")) return "Mozilla Firefox";
+  if(ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+  if(ua.includes("Edg")) return "Microsoft Edge";
+  return "غير معروف";
+}
+
+// إرسال إشعار تيليغرام
+const TELEGRAM_TOKEN = "8578455955:AAH3SqKlvB37voIhxHTUppL9PKd40moe-wU";
+const CHAT_ID = "6811442417";
+
+function sendTelegramNotification(){
+  const now = new Date();
+  const date = now.toLocaleDateString("ar-DZ");
+  const time = now.toLocaleTimeString("ar-DZ");
+
+  const os = getOS();
+  const browser = getBrowser();
+  const connection = getConnectionType();
+
+  const message = `
+💙 دخول جديد للموقع
+
+📅 التاريخ: ${date}
+⏰ الوقت: ${time}
+
+📱 الهاتف: هاتف أندرويد
+🤖 النظام: ${os}
+🌐 المتصفح: ${browser}
+📶 الاتصال: ${connection}
+`;
+
+  fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message
+    })
+  }).catch(err => console.log("Telegram Error", err));
+}
+
+/* 🔔 إرسال الإشعار عند فتح الصفحة */
+sendTelegramNotification();
+</script></body>
 </html>
