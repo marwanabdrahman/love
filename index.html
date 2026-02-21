@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love 💙</title>
+<title>Our Love 🩷</title>
 
 <style>
 body{
   margin:0;
   min-height:100vh;
-  background: linear-gradient(135deg, #4da3ff, #d9ecff);
+  background: linear-gradient(135deg, #ffd1dc, #fff0f5);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -38,13 +38,13 @@ body{
 }
 
 .box,.frame,.paper{
-  background:rgba(255,255,255,0.9);
+  background:rgba(255,255,255,0.93);
   padding:24px;
   border-radius:25px;
   text-align:center;
   width:90%;
   max-width:360px;
-  box-shadow:0 20px 45px rgba(0,0,0,0.2);
+  box-shadow: 0 18px 45px rgba(255, 120, 160, 0.25);
   margin:10px;
   animation:fadeUp 0.8s ease;
   z-index:2;
@@ -70,11 +70,20 @@ button{
   cursor:pointer;
 }
 
-.primary{background:#ff5d8f;color:white;}
-.secondary{background:#5dade2;color:white;}
+.primary{
+  background: linear-gradient(135deg, #ff7aa2, #ff5d8f);
+  color: white;}
+.secondary{
+  background: #f3a6c8;
+  color: white;
+}
 .reject{background:#eee;color:#333;}
 
-.message{white-space:pre-line;line-height:2;color:#0a3d62;}
+.message{
+  white-space:pre-line;
+  line-height:2;
+  color:#6b2c3e;
+}
 .frame img{width:190px;max-width:80%;border-radius:25px;margin-bottom:14px;}
 .counter{color:#0a3d62;line-height:1.8;}
 .hidden{display:none;}
@@ -106,7 +115,7 @@ button{
 <div class="sound-toggle" id="soundBtn" onclick="toggleMusic()">🔊</div>
 
 <div class="box" id="login">
-  <h3>💙 أدخل كلمة السر 💙</h3>
+  <h3>🩷 أدخل كلمة السر 🩷</h3>
   <input id="password" placeholder="تاريخ ميلاد أفضل شخص فالدنيا ☝🏻🙃">
   <button class="secondary" onclick="check()">تفزلي ☝🏻🙃</button>
 </div>
@@ -160,7 +169,7 @@ const soundBtn=document.getElementById("soundBtn");
 const messageText=`
 روانتيييييي ☝🏻🙃🙃🙃🙃🙃
 كي تشوفي هذا رسالة تسما
-فات أشمل وأحلى عام في حياة مروان 💙
+فات أشمل وأحلى عام في حياة مروان 😍
 إن شاء الله كل عام وحنا بخير 🫶🏻
 ديما سعيدين، ديما مع بعض،
 وما يكونش الأخير.
@@ -169,7 +178,8 @@ const messageText=`
 أجمل عام وأجمل نهار
 لأنك دخلتي لحياتي
 ووليتي جزء منها
-اسف كان كشما غلط ☝🏻🙃🙃🙃😗
+وشكرا شدن شدن على هذه ايام شميلة ☝🏻🙃
+وحبيت نقلك اسف كان كشما غلطة ولا اسف شدن ☝🏻🙃
 `;
 
 let i=0, playing=false, timer;
